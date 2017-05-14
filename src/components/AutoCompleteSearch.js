@@ -10,8 +10,7 @@ class AutoCompleteSearch extends Component{
 		this.state = {
 			query: '',
 			loading: false,
-			items: [],
-			artistInfo: null
+			items: []
 		}
 		this.handleChange = this.handleChange.bind(this);
 	}
@@ -53,6 +52,7 @@ class AutoCompleteSearch extends Component{
 
 	onSelect(artistName){
 		this.getInfo(artistName);
+
 	}
 
 	getInfo(artistName){
@@ -61,14 +61,20 @@ class AutoCompleteSearch extends Component{
 			loading: true
 		}, () => {
 			api.getArtistInfo(this.state.query)
-			   .then((data) => {
-			   		this.state.artistInfo = data;
-			   		this.props.onGetDataArtist(data);
-			   		this.setState({
-			   			loading: false
+			   .then((artistData) => {
+			   		api.getArtistAlbums(this.state.query)
+			   		   .then((albumsData) => {
+			   		   		console.log(albumsData)
+					   		this.props.onGetDataArtist(artistData, albumsData);
+					   		this.setState({
+					   			loading: false,
+					   			query: ''
+					   		});
 			   		});
+
 			});
 		});
+
 	}
 
 
