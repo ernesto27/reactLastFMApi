@@ -5,7 +5,7 @@ var api = {
 	endpoint: config.endpoint,
 	methodSearch: 'search',
 	methodInfo: 'getinfo',
-	albumsInfo: 'gettopalbums',
+	albumsTop: 'gettopalbums',
 
 	searchArtistByName(query){
 		return fetch(this.endpoint + '?method=artist.' + this.methodSearch + '&artist='+ query +'&limit=10&api_key=' + this.apiKey + '&format=json')
@@ -22,7 +22,14 @@ var api = {
 	},
 
 	getArtistAlbums(query){
-		return fetch(this.endpoint + '?method=artist.' + this.albumsInfo + '&artist='+ query +'&api_key=' + this.apiKey + '&limit=10&format=json')
+		return fetch(this.endpoint + '?method=artist.' + this.albumsTop + '&artist='+ query +'&api_key=' + this.apiKey + '&limit=10&format=json')
+			     .then((response) => {
+					return response.json()
+			    });
+	},
+
+	getAlbumInfo(data){
+		return fetch(this.endpoint + '?method=album.' + this.methodInfo + '&artist='+ data.artist +'&album='+ data.album +'&api_key=' + this.apiKey + '&format=json')
 			     .then((response) => {
 					return response.json()
 			    });
