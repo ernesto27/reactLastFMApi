@@ -5,6 +5,7 @@
   "devDependencies": {
     "react-scripts": "0.9.5"
   },
+  "homepage": "https://ernesto27.github.io/reactLastFMApi/"
   "dependencies": {
     "fbemitter": "^2.1.1",
     "react": "^15.5.4",
