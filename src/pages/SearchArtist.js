@@ -11,12 +11,25 @@ class SearchArtist extends Component{
       }
     }
 
+    componentWillMount(){
+        if(localStorage.getItem('artistInfo') != null && localStorage.getItem('artistAlbums') != null ){
+            this.setState({
+              artistInfo: JSON.parse(localStorage.getItem('artistInfo')),
+              artistAlbums: JSON.parse(localStorage.getItem('artistAlbums'))
+            });
+        }
+
+    }
+
     onGetDataArtist(data, albumsData){
       this.setState({
         artistInfo: data.artist,
         artistAlbums: albumsData.topalbums.album
       });
-      console.log(this.state)
+
+      // Guardo data de artista y album en localstorage
+      localStorage.setItem('artistInfo', JSON.stringify(data.artist));
+      localStorage.setItem('artistAlbums', JSON.stringify(albumsData.topalbums.album));
 
     }
     render(){

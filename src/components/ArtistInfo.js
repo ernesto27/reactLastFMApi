@@ -8,16 +8,13 @@ function Tags(tags){
   	<div>
   		{tags.map((key, tag) =>
   			<span key={key}>
-    			<Label  bsStyle="primary" style={{ 'font-size' : '12px' }}>{tag.name}</Label>{'   '}
+    			<Label  bsStyle="primary" style={{ 'fontSize' : '12px' }}>{tag.name}</Label>{'   '}
     		</span>
   		)}
 
  	</div>
  );
 }
-
-
-
 class ArtistInfo extends Component{
 
 
