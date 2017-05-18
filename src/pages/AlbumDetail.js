@@ -25,6 +25,15 @@ class AlbumDetail extends Component{
         });
     }
 
+    convert(seconds) {
+        var seconds = Number(seconds);
+        var minutes = Math.floor(seconds % 3600 / 60);
+        var seconds = Math.floor(seconds % 3600 % 60);
+        minutes = (minutes < 10 ? '0' + minutes : minutes);
+        seconds = (seconds < 10 ? '0' + seconds : seconds);
+        return minutes + ':' + seconds;
+    }
+
 
     render(){
         if(this.state.loading) return <p>Loading...</p>;
@@ -43,7 +52,10 @@ class AlbumDetail extends Component{
                         <h4>Songs</h4>
                         <ListGroup>
                             {this.state.album.tracks.track.map((track) =>
-                                <ListGroupItem>{track.name}</ListGroupItem>
+                                <ListGroupItem>
+                                    {track.name}
+                                    <div className="pull-right">{this.convert(track.duration)}</div>
+                                </ListGroupItem>
                             )}
                         </ListGroup>
                     </Col>
